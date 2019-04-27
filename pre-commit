@@ -10,6 +10,7 @@ git diff --cached --name-only --diff-filter=ACMRT | \
 while read file; do
 	if [[ $(basename $file) = $FORBIDDEN ]]; then
 		git rm --cached "$file" &> /dev/null && \
-			echo "Hook removed $file (git rm --cached)"
+			echo "Hook removed $file (git rm --cached)" || \
+			echo "Hook tried to remove $file (git rm --cached) but encountered a problem"
 	fi
 done
